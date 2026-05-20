@@ -11,13 +11,14 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
+          {/* <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
             <span className="text-xs font-bold text-primary-foreground">
               EM
             </span>
-          </div>
-          <span className="font-semibold tracking-tight">
-            Ernest Maude <span className="text-primary">International</span>
+          </div> */}
+          <span className="font-semibold tracking-tight text-primary">
+            International Private Medical Insurance
+            {/* <span className="text-primary">International</span> */}
           </span>
         </Link>
 

@@ -11,12 +11,9 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <div className="mb-4 flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary">
-                <span className="text-xs font-bold text-primary-foreground">
-                  EM
-                </span>
-              </div>
-              <span className="text-sm font-semibold">Ernest Maude</span>
+              <span className="text-sm font-semibold">
+                International Private Medical Insurance
+              </span>
             </div>
             <p className="text-xs leading-relaxed text-muted-foreground">
               Premium international private medical insurance for individuals,
