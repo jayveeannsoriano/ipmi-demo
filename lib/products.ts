@@ -1,0 +1,162 @@
+import type { Product } from "@/types/products"
+
+export const PRODUCTS: Product[] = [
+  {
+    id: "medical-membership",
+    name: "Medical Membership Program",
+    tagline: "Structured healthcare membership for individuals & families",
+    description:
+      "A comprehensive medical membership plan designed for individuals and families who need reliable, structured access to international healthcare. Covers planned and emergency medical needs with clear membership tiers.",
+    idealFor: [
+      "Individuals needing structured healthcare access",
+      "Families seeking predictable medical costs",
+      "Frequent international travellers",
+      "Those wanting clear, tiered coverage",
+    ],
+    keyBenefits: [
+      {
+        icon: "Hospital",
+        title: "Worldwide Inpatient Cover",
+        description: "Full inpatient hospital cover in over 190 countries.",
+      },
+      {
+        icon: "Stethoscope",
+        title: "Outpatient Consultations",
+        description: "GP and specialist consultations included as standard.",
+      },
+      {
+        icon: "Airplane",
+        title: "Emergency Evacuation",
+        description: "Medical evacuation to the nearest appropriate facility.",
+      },
+      {
+        icon: "Heart",
+        title: "Wellness Benefits",
+        description: "Preventive care and annual health checks included.",
+      },
+    ],
+    features: {
+      coverageArea: "Worldwide",
+      emergencyCare: true,
+      dental: "Optional add-on",
+      vision: "Optional add-on",
+      maternity: "Optional add-on",
+      preExisting: "Subject to underwriting",
+      repatriation: true,
+      corporate: false,
+      priceTier: "mid",
+    },
+    purchasePath: "direct",
+    ctaLabel: "Get Started",
+    ctaUrl: "/products/medical-membership",
+    priceTier: "mid",
+    badge: "Most Popular",
+  },
+  {
+    id: "expatriate-healthcare",
+    name: "Expatriate Healthcare",
+    tagline: "Tailored cover for expats living and working abroad",
+    description:
+      "Purpose-built international health insurance for expatriates. Designed to provide seamless healthcare continuity whether you are relocating, already living abroad, or on an extended international assignment.",
+    idealFor: [
+      "Individuals and families relocating abroad",
+      "Long-term international workers",
+      "Expatriates on extended assignments",
+      "Those requiring home-country cover when visiting",
+    ],
+    keyBenefits: [
+      {
+        icon: "Globe",
+        title: "Expat-Specific Coverage",
+        description:
+          "Designed specifically for life outside your home country.",
+      },
+      {
+        icon: "House",
+        title: "Home Country Visits",
+        description: "Cover maintained when returning home for visits.",
+      },
+      {
+        icon: "FirstAid",
+        title: "Chronic Condition Management",
+        description: "Ongoing management of long-term conditions.",
+      },
+      {
+        icon: "UserCircle",
+        title: "Personal Case Manager",
+        description: "Dedicated case manager for complex claims.",
+      },
+    ],
+    features: {
+      coverageArea: "Worldwide including home country visits",
+      emergencyCare: true,
+      dental: "Included in comprehensive tier",
+      vision: "Included in comprehensive tier",
+      maternity: "Available with waiting period",
+      preExisting: "Full medical underwriting",
+      repatriation: true,
+      corporate: false,
+      priceTier: "premium",
+    },
+    purchasePath: "direct",
+    ctaLabel: "Get Your Plan",
+    ctaUrl: "/products/expatriate-healthcare",
+    priceTier: "premium",
+    badge: "Best for Expats",
+  },
+  {
+    id: "health-compass",
+    name: "Health Compass",
+    tagline: "Expert-guided cover for complex or corporate needs",
+    description:
+      "A bespoke IPMI solution for individuals with complex healthcare requirements and HR managers seeking comprehensive expatriate employee benefits. Delivered through expert broker consultation to ensure the right fit.",
+    idealFor: [
+      "HR & benefits managers",
+      "Corporate expatriate programmes",
+      "Individuals with complex medical histories",
+      "Broker-assisted purchases",
+    ],
+    keyBenefits: [
+      {
+        icon: "Buildings",
+        title: "Corporate Group Plans",
+        description: "Scalable group policies for expatriate employee teams.",
+      },
+      {
+        icon: "ChartBar",
+        title: "Bespoke Benefits Design",
+        description: "Customised coverage tailored to exact requirements.",
+      },
+      {
+        icon: "Headset",
+        title: "Dedicated Advisor",
+        description: "Named advisor managing your account end-to-end.",
+      },
+      {
+        icon: "Shield",
+        title: "Enhanced Pre-existing Cover",
+        description: "Broader acceptance of pre-existing conditions.",
+      },
+    ],
+    features: {
+      coverageArea: "Worldwide (bespoke regions available)",
+      emergencyCare: true,
+      dental: "Fully included",
+      vision: "Fully included",
+      maternity: "Fully included",
+      preExisting: "Broad acceptance via underwriting",
+      repatriation: true,
+      corporate: true,
+      priceTier: "premium",
+    },
+    purchasePath: "quote",
+    ctaLabel: "Request a Quote",
+    ctaUrl: "/products/health-compass",
+    priceTier: "premium",
+    badge: "Corporate & Complex",
+  },
+]
+
+export function getProductById(id: string) {
+  return PRODUCTS.find((p) => p.id === id) ?? null
+}
