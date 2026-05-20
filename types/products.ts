@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react"
+
 export type ProductId =
   | "medical-membership"
   | "expatriate-healthcare"
@@ -6,7 +8,7 @@ export type ProductId =
 export type PriceTier = "economy" | "mid" | "premium"
 
 export type Benefit = {
-  icon: string
+  icon: string | LucideIcon
   title: string
   description: string
 }

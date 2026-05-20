@@ -19,7 +19,7 @@ export function BenefitsList({ benefits }: BenefitsListProps) {
             className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10 text-lg text-primary"
             aria-hidden="true"
           >
-            ✦
+            {typeof benefit.icon === "string" ? benefit.icon : <benefit.icon />}
           </div>
           <div>
             <p className="text-sm font-medium">{benefit.title}</p>

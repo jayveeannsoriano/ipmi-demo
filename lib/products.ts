@@ -1,4 +1,18 @@
 import type { Product } from "@/types/products"
+import {
+  Building,
+  ChartBar,
+  Cross,
+  Globe,
+  Headset,
+  Heart,
+  Hospital,
+  House,
+  Plane,
+  Shield,
+  Stethoscope,
+  User2Icon,
+} from "lucide-react"
 
 export const PRODUCTS: Product[] = [
   {
@@ -15,22 +29,22 @@ export const PRODUCTS: Product[] = [
     ],
     keyBenefits: [
       {
-        icon: "Hospital",
+        icon: Hospital,
         title: "Worldwide Inpatient Cover",
         description: "Full inpatient hospital cover in over 190 countries.",
       },
       {
-        icon: "Stethoscope",
+        icon: Stethoscope,
         title: "Outpatient Consultations",
         description: "GP and specialist consultations included as standard.",
       },
       {
-        icon: "Airplane",
+        icon: Plane,
         title: "Emergency Evacuation",
         description: "Medical evacuation to the nearest appropriate facility.",
       },
       {
-        icon: "Heart",
+        icon: Heart,
         title: "Wellness Benefits",
         description: "Preventive care and annual health checks included.",
       },
@@ -66,23 +80,23 @@ export const PRODUCTS: Product[] = [
     ],
     keyBenefits: [
       {
-        icon: "Globe",
+        icon: Globe,
         title: "Expat-Specific Coverage",
         description:
           "Designed specifically for life outside your home country.",
       },
       {
-        icon: "House",
+        icon: House,
         title: "Home Country Visits",
         description: "Cover maintained when returning home for visits.",
       },
       {
-        icon: "FirstAid",
+        icon: Cross,
         title: "Chronic Condition Management",
         description: "Ongoing management of long-term conditions.",
       },
       {
-        icon: "UserCircle",
+        icon: User2Icon,
         title: "Personal Case Manager",
         description: "Dedicated case manager for complex claims.",
       },
@@ -118,22 +132,22 @@ export const PRODUCTS: Product[] = [
     ],
     keyBenefits: [
       {
-        icon: "Buildings",
+        icon: Building,
         title: "Corporate Group Plans",
         description: "Scalable group policies for expatriate employee teams.",
       },
       {
-        icon: "ChartBar",
+        icon: ChartBar,
         title: "Bespoke Benefits Design",
         description: "Customised coverage tailored to exact requirements.",
       },
       {
-        icon: "Headset",
+        icon: Headset,
         title: "Dedicated Advisor",
         description: "Named advisor managing your account end-to-end.",
       },
       {
-        icon: "Shield",
+        icon: Shield,
         title: "Enhanced Pre-existing Cover",
         description: "Broader acceptance of pre-existing conditions.",
       },
