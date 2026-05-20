@@ -15,7 +15,7 @@ const STANDARD_CONTRACT_CONTENT = {
   description:
     "Our IPMI plans are designed specifically for expatriates living or working outside their home country. Based on your answers, a standard domestic health insurance policy is likely to be more suitable and better value.",
   actions: [
-    { label: "Speak to an advisor", href: "#", primary: true },
+    { label: "Contact Ernest Maude", href: "#", primary: true },
     {
       label: "Learn about our IPMI plans anyway",
       href: "/compare",

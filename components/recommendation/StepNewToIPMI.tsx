@@ -8,7 +8,8 @@ interface StepNewToIPMIProps {
 
 /**
  * StepNewToIPMI — "Are you new to IPMI?"
- * Experienced users skip the comparison/pre-selection steps and go straight to Branch A.
+ * YES (new) → Health Compass directly: first-timers benefit from expert-guided setup.
+ * NO (experienced) → continues to full-comparison preference question.
  */
 export function StepNewToIPMI({ onYes, onNo, onBack }: StepNewToIPMIProps) {
   return (

@@ -70,17 +70,23 @@ function reducer(
         }
       }
 
-      // FMU NO loops back to pec-awareness — increment counter
+      // FMU NO loops back to pec-awareness — roll history back to before pec-awareness
+      // so the step counter rewinds rather than growing indefinitely.
       if (
         result.stepId === "pec-awareness" &&
         action.stepId === "fmu" &&
         !action.value
       ) {
+        const lastPecIdx = state.stepHistory.lastIndexOf("pec-awareness")
+        const trimmedHistory =
+          lastPecIdx >= 0
+            ? state.stepHistory.slice(0, lastPecIdx)
+            : state.stepHistory
         return {
           ...state,
           answers: newAnswers,
           currentStepId: "pec-awareness",
-          stepHistory: [...state.stepHistory, action.stepId],
+          stepHistory: trimmedHistory,
           pecLoopCount: state.pecLoopCount + 1,
         }
       }

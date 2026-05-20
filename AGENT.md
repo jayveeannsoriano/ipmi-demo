@@ -128,55 +128,107 @@ The engine implements the following decision tree exactly. Each node is a yes/no
 #### Decision Tree
 
 ```
+
 START
+
 │
+
 ├─► Are you an expatriate?
-│     │
-│     ├─ YES ─► Are you new to IPMI?
-│     │               │
-│     │               ├─ YES ─► Do you want full comparisons (with AI Assistant)?
-│     │               │               │
-│     │               │               ├─ NO ──► Will you consider 2 pre-selected best-of-breed
-│     │               │               │         IPMI options with online purchase?
-│     │               │               │               │
-│     │               │               │               ├─ YES ─► [Branch A — see below]
-│     │               │               │               └─ NO  ─► [Branch A — see below]
-│     │               │               │
-│     │               │               └─ YES ─► [Branch A — see below]
-│     │               │
-│     │               └─ NO (experienced) ─► [Branch A — see below]
-│     │
-│     └─ NO ──► Standard Contract
+
+│     │
+
+│     ├─ YES ─► Are you new to IPMI?
+
+│     │               │
+
+│     │               ├─ YES ─► Health Compass
+
+│     │               ├─ NO ──► Do you want full comparisons (with AI Assistant)?
+
+│     │               │               │
+
+│     │               │               ├─ NO ──► Will you consider 2 pre-selected best-of-breed
+
+│     │               │               │         IPMI options with online purchase?
+
+│     │               │               │               │
+
+│     │               │               │               ├─ YES ─► Health Compass
+
+│     │               │               │               └─ NO  ─► [Branch A — see below]
+
+│     │               │               │
+
+│     │               │               └─ YES ─► [Branch A — see below]
+
+│     │               │
+
+│     │               └─ NO (experienced) ─► [Branch A — see below]
+
+│     │
+
+│     └─ NO ──► Normal contact us page. ‘Contact Ernest Maude’ form.
+
 │
+
 │
+
 Branch A — Coverage & Underwriting Questions
+
 │
+
 ├─► Are you aware that pre-existing conditions are most often excluded?
-│     │
-│     ├─ YES ─► Are you happy with Major Medical Hospitalisation covers ONLY?
-│     │         (i.e. no out-patient and no general practitioners' costs covered)
-│     │               │
-│     │               ├─ YES ─► Are you familiar with group memberships
-│     │               │         (e.g. similar to employer schemes)?
-│     │               │               │
-│     │               │               ├─ YES ─► Do you understand that a group
-│     │               │               │         membership will be held under a Trust?
-│     │               │               │               │
-│     │               │               │               ├─ YES ──► Medical Membership Program
-│     │               │               │               └─ NO  ──► Expatriate Healthcare
-│     │               │               │
-│     │               │               └─ NO ──► Expatriate Healthcare
-│     │               │
-│     │               └─ NO ─► Do you require Full Medical Underwriting ("FMU")
-│     │                         to see if pre-existing conditions could be included?
-│     │                               │
-│     │                               ├─ YES ──► Health Compass
-│     │                               └─ NO  ──► [loop back to pre-existing
-│     │                                           conditions awareness question]
-│     │
-│     └─ NO ──► [loop — re-ask until user answers YES]
-│               ⚠ This is a mandatory awareness gate; user cannot proceed
-│                 until they acknowledge pre-existing condition exclusions.
+
+│     │
+
+│     ├─ YES ─► Are you happy with Major Medical Hospitalisation covers ONLY?
+
+│     │         (i.e. no out-patient and no general practitioners' costs covered)
+
+│     │               │
+
+│     │               ├─ YES ─► Are you familiar with group memberships
+
+│     │               │         (e.g. similar to employer schemes)?
+
+│     │               │               │
+
+│     │               │               ├─ YES ─► Do you understand that a group
+
+│     │               │               │         membership will be held under a Trust?
+
+│     │               │               │               │
+
+│     │               │               │               ├─ YES ──► Medical Membership Program
+
+│     │               │               │               └─ NO  ──► Expatriate Healthcare
+
+│     │               │               │
+
+│     │               │               └─ NO ──► Expatriate Healthcare
+
+│     │               │
+
+│     │               └─ NO ─► Do you require Full Medical Underwriting ("FMU")
+
+│     │                         to see if pre-existing conditions could be included?
+
+│     │                               │
+
+│     │                               ├─ YES ──► Health Compass
+
+│     │                               └─ NO  ──► [loop back to pre-existing
+
+│     │                                           conditions awareness question]
+
+│     │
+
+│     └─ NO ──► [loop — re-ask until user answers YES]
+
+│               ⚠ This is a mandatory awareness gate; user cannot proceed
+
+│                 until they acknowledge pre-existing condition exclusions.
+
 ```
 
 #### Loop Handling Rule

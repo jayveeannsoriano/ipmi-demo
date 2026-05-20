@@ -12,10 +12,12 @@ import type { ProductId } from "@/types/products"
  * Implements the exact tree defined in AGENT.md §6.2:
  *   expatriate? → NO → standard-contract
  *   expatriate? → YES → new-to-ipmi?
- *     new-to-ipmi? → YES → full-comparison?
+ *     new-to-ipmi? → YES → health-compass           ← first-timers need guided setup
+ *     new-to-ipmi? → NO  → full-comparison?
  *       full-comparison? → YES → [Branch A]
- *       full-comparison? → NO  → pre-selected-options? → [Branch A either way]
- *     new-to-ipmi? → NO (experienced) → [Branch A]
+ *       full-comparison? → NO  → pre-selected-options?
+ *         pre-selected-options? → YES → health-compass  ← wants broker-curated pick
+ *         pre-selected-options? → NO  → [Branch A]
  *
  * Branch A:
  *   pec-awareness? → NO  → loop (hard gate)
@@ -47,9 +49,9 @@ const RATIONALE: Record<RecommendationOutcome, string[]> = {
     "Expatriate Healthcare is purpose-built for individuals living and working outside their home country.",
   ],
   "health-compass": [
-    "You are an expatriate who requires Full Medical Underwriting to assess pre-existing conditions.",
-    "Health Compass provides bespoke, broker-assisted cover with broader underwriting options.",
-    "A dedicated advisor will work with you to structure the most suitable policy.",
+    "Health Compass provides expert-guided, bespoke IPMI cover with a dedicated advisor.",
+    "Whether you are new to international cover, prefer curated plan options, or require Full Medical Underwriting, Health Compass ensures the right fit.",
+    "A named advisor will structure a policy around your specific circumstances and health history.",
   ],
   "standard-contract": [
     "Based on your answers, a standard domestic health insurance contract is likely more appropriate.",
@@ -95,35 +97,51 @@ export function computeNextStep(
 
     case "new-to-ipmi":
       if (answer) {
-        return { type: "step", stepId: "full-comparison" }
+        // YES (new to IPMI) → Health Compass: first-timers need expert-guided setup
+        return {
+          type: "recommendation",
+          recommendation: makeRecommendation("health-compass"),
+        }
       }
-      // experienced user → Branch A
-      return { type: "step", stepId: "pec-awareness" }
+      // NO (experienced) → ask about comparison preference
+      return { type: "step", stepId: "full-comparison" }
 
     case "full-comparison":
       if (answer) {
-        // YES → Branch A directly
-        return { type: "step", stepId: "pec-awareness" }
+        // YES → Health Compass
+        return {
+          type: "recommendation",
+          recommendation: makeRecommendation("health-compass"),
+        }
       }
       // NO → ask about pre-selected options first
       return { type: "step", stepId: "pre-selected-options" }
 
     case "pre-selected-options":
-      // Either YES or NO → Branch A
+      if (answer) {
+        // YES (will consider pre-selected options) → Health Compass: advisor curates the best fit
+        return {
+          type: "recommendation",
+          recommendation: makeRecommendation("health-compass"),
+        }
+      }
+      // NO (wants to evaluate independently) → Branch A
       return { type: "step", stepId: "pec-awareness" }
 
     case "pec-awareness":
-      if (!answer) {
-        // Hard gate: signal loop — caller must increment pecLoopCount and re-show this step
-        return { type: "step", stepId: "pec-awareness" }
+      if (answer) {
+        return { type: "step", stepId: "major-medical-only" }
       }
-      return { type: "step", stepId: "major-medical-only" }
+      return { type: "step", stepId: "fmu" }
 
     case "major-medical-only":
       if (answer) {
         return { type: "step", stepId: "group-membership" }
       }
-      return { type: "step", stepId: "fmu" }
+      return {
+        type: "recommendation",
+        recommendation: makeRecommendation("expatriate-healthcare"),
+      }
 
     case "group-membership":
       if (answer) {

@@ -8,7 +8,8 @@ interface StepPreSelectedOptionsProps {
 
 /**
  * StepPreSelectedOptions — "Will you consider 2 pre-selected best-of-breed IPMI options?"
- * Both YES and NO lead to Branch A — this step collects the preference for analytics.
+ * YES → Health Compass: advisor curates the two best-fit plans for the user.
+ * NO → Branch A (pec-awareness): user proceeds with independent self-assessment.
  */
 export function StepPreSelectedOptions({
   onYes,
@@ -18,12 +19,12 @@ export function StepPreSelectedOptions({
   return (
     <YesNoStep
       question="Would you consider two pre-selected best-of-breed IPMI options with online purchase?"
-      subtext="Our advisors have identified two top-rated plans that suit most expatriate profiles. You can purchase either online in minutes."
+      subtext="Our advisors have identified two top-rated plans that suit most expatriate profiles. Choosing this option connects you with Health Compass for expert-guided selection."
       onYes={onYes}
       onNo={onNo}
       onBack={onBack}
       yesLabel="Yes, that works for me"
-      noLabel="No, I'd prefer to see all options"
+      noLabel="No, I'd prefer to assess my own options"
     />
   )
 }

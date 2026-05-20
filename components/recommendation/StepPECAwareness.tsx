@@ -44,7 +44,7 @@ export function StepPECAwareness({
       onNo={handleNo}
       onBack={onBack}
       yesLabel="Yes, I understand"
-      noLabel="No, tell me more"
+      noLabel="No"
     >
       {showEducation && (
         <div
