@@ -21,10 +21,10 @@ export function Tooltip({ content, children }: TooltipProps) {
           <TooltipPrimitive.Content
             side="top"
             sideOffset={4}
-            className="z-50 max-w-xs animate-in rounded-md bg-popover px-3 py-1.5 text-xs text-popover-foreground shadow-md fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95"
+            className="z-50 max-w-xs animate-in rounded-md bg-sky-100 px-3 py-1.5 text-xs text-popover-foreground shadow-md fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95"
           >
             {content}
-            <TooltipPrimitive.Arrow className="fill-popover" />
+            <TooltipPrimitive.Arrow className="fill-sky-100" />
           </TooltipPrimitive.Content>
         </TooltipPrimitive.Portal>
       </TooltipPrimitive.Root>

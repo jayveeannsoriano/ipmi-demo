@@ -22,7 +22,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
       {/* Hero */}
       <div
         className={[
-          "space-y-4 rounded-xl border-t-4 p-6",
+          "space-y-4 rounded-xl border p-6",
           colors.border,
           colors.heroBg,
         ].join(" ")}

@@ -17,7 +17,7 @@ export function InsuranceTerm({ term, definition }: InsuranceTermProps) {
       <span
         tabIndex={0}
         aria-label={`${term}: ${definition}`}
-        className="cursor-help border-b border-dashed border-muted-foreground/50 text-foreground"
+        className="cursor-help border-b border-dashed border-muted-foreground/50 text-foreground hover:text-primary focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:outline-none"
       >
         {term}
       </span>

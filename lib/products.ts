@@ -14,6 +14,11 @@ import {
   User2Icon,
 } from "lucide-react"
 
+const MedicalMembershipLink = "https://medicalmembershipprogram.com/"
+const ExpatriateHealthcareLink =
+  "https://www.expatriatehealthcare.com/broker/ernestmaudeinsurance"
+const HealthCompassLink = "https://api.health-compass.com/ernestmaude"
+
 export const PRODUCTS: Product[] = [
   {
     id: "medical-membership",
@@ -62,7 +67,7 @@ export const PRODUCTS: Product[] = [
     },
     purchasePath: "direct",
     ctaLabel: "Get Started",
-    ctaUrl: "/products/medical-membership",
+    ctaUrl: MedicalMembershipLink,
     priceTier: "mid",
     badge: "Most Popular",
   },
@@ -114,7 +119,7 @@ export const PRODUCTS: Product[] = [
     },
     purchasePath: "direct",
     ctaLabel: "Get Your Plan",
-    ctaUrl: "/products/expatriate-healthcare",
+    ctaUrl: ExpatriateHealthcareLink,
     priceTier: "premium",
     badge: "Best for Expats",
   },
@@ -165,7 +170,7 @@ export const PRODUCTS: Product[] = [
     },
     purchasePath: "quote",
     ctaLabel: "Request a Quote",
-    ctaUrl: "/products/health-compass",
+    ctaUrl: HealthCompassLink,
     priceTier: "premium",
     badge: "Corporate & Complex",
   },

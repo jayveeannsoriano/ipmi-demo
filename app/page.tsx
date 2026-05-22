@@ -3,8 +3,10 @@ import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { HeroSection } from "@/components/home/HeroSection"
 import { JourneySelector } from "@/components/home/JourneySelector"
-import { ProductCards } from "@/components/home/ProductCards"
 import { WhatsAppButton } from "@/components/shared/WhatsAppButton"
+import { ProductCards } from "@/components/home/ProductCards"
+import { AboutIPMI } from "@/components/home/AboutIPMI"
+import { FAQSection } from "@/components/home/FAQSection"
 
 export const metadata: Metadata = {
   title: "Ernest Maude International — IPMI Plans",
@@ -18,8 +20,10 @@ export default function HomePage() {
       <Header />
       <main id="main-content">
         <HeroSection />
-        <JourneySelector />
+        <AboutIPMI />
         <ProductCards />
+        <FAQSection />
+        <JourneySelector />
 
         {/* Trust bar */}
         <section className="border-y border-border/50 bg-muted/20 py-10">

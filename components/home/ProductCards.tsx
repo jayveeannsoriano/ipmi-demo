@@ -1,9 +1,8 @@
 import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { ArrowRight, CheckIcon } from "lucide-react"
 import { PRODUCTS } from "@/lib/products"
 import { PRODUCT_COLORS } from "@/lib/product-colors"
+import { Check } from "@phosphor-icons/react"
 
 const PRICE_TIER_LABEL: Record<string, string> = {
   economy: "Economy",
@@ -12,8 +11,8 @@ const PRICE_TIER_LABEL: Record<string, string> = {
 }
 
 /**
- * ProductCards — grid of all three IPMI product cards on the landing page.
- * Each card shows key benefits, ideal user badge, and a CTA.
+ * ProductCards � minimal, professional grid of all three IPMI product cards.
+ * Left-border accent differentiates each plan; no heavy colour fills.
  */
 export function ProductCards() {
   return (
@@ -29,24 +28,24 @@ export function ProductCards() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {PRODUCTS.map((product) => {
             const colors = PRODUCT_COLORS[product.id]
             return (
-              <Card
+              <div
                 key={product.id}
                 className={[
-                  "group flex flex-col overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg",
-                  "border-t-4",
+                  "group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md",
                   colors.border,
                 ].join(" ")}
               >
-                <CardHeader className={["pb-4", colors.heroBg].join(" ")}>
-                  <div className="mb-3 flex items-start justify-between gap-2">
+                {/* Header */}
+                <div className={["px-6 pt-6 pb-4", colors.heroBg].join(" ")}>
+                  <div className="mb-3 flex items-center justify-between gap-2">
                     {product.badge ? (
                       <span
                         className={[
-                          "rounded-full px-2.5 py-0.5 text-xs font-medium",
+                          "inline-block rounded-md px-2 py-0.5 text-xs font-medium",
                           colors.badgeBg,
                         ].join(" ")}
                       >
@@ -55,73 +54,80 @@ export function ProductCards() {
                     ) : (
                       <span />
                     )}
-                    <Badge variant="outline" className="ml-auto text-xs">
+                    <span className="ml-auto text-xs text-muted-foreground">
                       {PRICE_TIER_LABEL[product.priceTier]}
-                    </Badge>
+                    </span>
                   </div>
                   <h3
                     className={[
-                      "text-lg leading-tight font-semibold",
+                      "text-base leading-snug font-semibold",
                       colors.text,
                     ].join(" ")}
                   >
                     {product.name}
                   </h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="mt-1 text-sm text-muted-foreground">
                     {product.tagline}
                   </p>
-                </CardHeader>
+                </div>
 
-                <CardContent className="flex flex-1 flex-col gap-4 pt-4">
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {product.description}
-                  </p>
-
-                  <div className="mt-auto">
-                    <p className="mb-2 text-xs font-semibold tracking-wider text-foreground uppercase">
+                {/* Body */}
+                <div className="flex flex-1 flex-col gap-5 px-6 py-5">
+                  {/* Ideal for */}
+                  <div>
+                    <p className="mb-2 text-xs font-medium tracking-wider text-muted-foreground uppercase">
                       Ideal for
                     </p>
-                    <ul className="space-y-1">
+                    <ul className="space-y-1.5">
                       {product.idealFor.slice(0, 3).map((item) => (
                         <li
                           key={item}
-                          className="flex items-start gap-2 text-sm text-muted-foreground"
+                          className="flex items-start gap-2 text-sm text-foreground/75"
                         >
                           <span
-                            className={["mt-0.5 font-bold", colors.check].join(
-                              " "
-                            )}
+                            className={[
+                              "text-s mt-xs leading-5",
+                              colors.check,
+                            ].join(" ")}
                             aria-hidden="true"
                           >
-                            ✓
+                            <CheckIcon className="h-5 w-3.5" />
                           </span>
                           {item}
                         </li>
                       ))}
                     </ul>
                   </div>
-                </CardContent>
 
-                <CardFooter className="flex items-center gap-3 pt-4">
+                  {/* Divider */}
+                  <hr className="border-border" />
+
+                  {/* Description */}
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {product.description}
+                  </p>
+                </div>
+
+                {/* Footer */}
+                <div className="flex items-center justify-between gap-3 border-t border-border px-6 py-4">
                   <Link
                     href={product.ctaUrl}
                     className={[
-                      "inline-flex flex-1 items-center justify-center rounded-full px-4 py-2.5 text-sm font-semibold text-white transition-colors",
+                      "inline-flex items-center gap-1.5 rounded-md px-4 py-2 text-sm font-medium text-white transition-colors",
                       colors.ctaBg,
                     ].join(" ")}
                   >
                     {product.ctaLabel}
+                    <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    asChild
-                    className="shrink-0"
+                  <Link
+                    href="/compare"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
-                    <Link href="/compare">Compare</Link>
-                  </Button>
-                </CardFooter>
-              </Card>
+                    Compare
+                  </Link>
+                </div>
+              </div>
             )
           })}
         </div>

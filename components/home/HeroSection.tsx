@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
  */
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden py-20 md:py-28">
+    <section className="relative overflow-hidden py-20 md:py-45">
       {/* Background gradient */}
       <div
         aria-hidden="true"
