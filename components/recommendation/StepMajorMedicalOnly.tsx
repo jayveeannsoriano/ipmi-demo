@@ -1,3 +1,4 @@
+import { InfoTooltip } from "@/components/shared/InfoTooltip"
 import { YesNoStep } from "./YesNoStep"
 
 interface StepMajorMedicalOnlyProps {
@@ -17,8 +18,19 @@ export function StepMajorMedicalOnly({
 }: StepMajorMedicalOnlyProps) {
   return (
     <YesNoStep
-      question="Are you comfortable with Major Medical Hospitalisation cover as your primary protection?"
-      subtext="Major Medical Hospitalisation covers in-hospital stays, surgery and emergency care — but does not include outpatient consultations or GP visits."
+      question={
+        <span>
+          Are you comfortable with{" "}
+          <span className="inline-flex items-baseline gap-1">
+            <InfoTooltip
+              triggerText="Major Medical Hospitalisation "
+              content="Major Medical Hospitalisation covers in-hospital stays, surgery, and emergency care. It does not include outpatient GP visits, specialist consultations, or routine health checks — those require a more comprehensive plan."
+            />
+          </span>{" "}
+          cover as your primary protection?
+        </span>
+      }
+      subtext="This is a more focused, cost-effective tier. If you need outpatient or day-to-day cover included, choose 'No'."
       onYes={onYes}
       onNo={onNo}
       onBack={onBack}

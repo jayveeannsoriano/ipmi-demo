@@ -1,3 +1,4 @@
+import { InfoTooltip } from "@/components/shared/InfoTooltip"
 import { YesNoStep } from "./YesNoStep"
 
 interface StepNewToIPMIProps {
@@ -14,8 +15,20 @@ interface StepNewToIPMIProps {
 export function StepNewToIPMI({ onYes, onNo, onBack }: StepNewToIPMIProps) {
   return (
     <YesNoStep
-      question="Are you new to international private medical insurance?"
-      subtext="IPMI (International Private Medical Insurance) is health cover designed specifically for people living outside their home country."
+      question={
+        <span>
+          Are you new to{" "}
+          <span className="inline-flex items-baseline gap-1">
+            international private medical insurance
+            <InfoTooltip
+              triggerText="(IPMI)"
+              content="International Private Medical Insurance (IPMI) provides health cover for people living or working outside their home country. It is separate from travel insurance and is designed for long-term international living."
+            />
+          </span>
+          ?
+        </span>
+      }
+      subtext="If this is your first time exploring IPMI, we'll guide you to the most straightforward option first."
       onYes={onYes}
       onNo={onNo}
       onBack={onBack}

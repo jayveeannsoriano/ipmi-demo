@@ -8,25 +8,17 @@
 
 ## 1. Project Overview
 
-Build a premium **decision-confidence layer** that serves as the unified IPMI recommendation and routing experience for both **Ernest Maude** and **Ernest Maude International**. All three IPMI products are hosted on external third-party platforms. This application's sole purpose is to receive visitors, guide them to the right product through smart UX, and hand them off in a single confident, deliberate click.
-
-The platform does not build purchase flows, quote forms, or AI comparison tools — those exist on the external platforms. What it builds is everything that happens _before_ the handoff: education, guided questioning, hover-based clarification, and a clear recommendation — so that when the visitor clicks through, they arrive already knowing what they want.
-
-Two complementary journeys support this: a self-directed path for informed users and a guided recommendation flow for first-time visitors.
+Build a premium, conversion-focused IPMI web application that serves as the unified insurance recommendation and routing experience for both **Ernest Maude** and **Ernest Maude International**. The platform guides visitors to the most suitable IPMI solution through two complementary journeys: a self-directed path for informed users and a guided recommendation flow for first-time visitors.
 
 ---
 
 ## 2. Available IPMI Products
 
-All three products are **external third-party platforms**. Ernest Maude does not own or host the purchase or quote flows — it routes visitors to them.
-
-| #   | Product                        | Primary Audience                             | Handoff Type                                     | Notes                                                                                                    |
-| --- | ------------------------------ | -------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------- |
-| 1   | **Medical Membership Program** | Individuals, families                        | External platform — direct digital purchase      | Fixed price regardless of age or gender; no quotation step                                               |
-| 2   | **Expatriate Healthcare**      | Expats, long-term international travelers    | External platform — direct digital purchase      | 24/7 straight-through digital purchase                                                                   |
-| 3   | **Health Compass**             | Complex needs, HR/corporate, broker-assisted | External platform — AI comparison + formal quote | Requires wet-ink application after quotation; Ernest Maude hosts at `api.health-compass.com/ernestmaude` |
-
-> **Strategic note:** Options 1 and 2 are the preferred conversion targets due to their 24/7 straight-through digital purchase capability. Option 3 requires analogue follow-up and an intense post-quote period. The platform's design should naturally prioritise and surface Options 1 and 2.
+| #   | Product                        | Primary Audience                                            | Purchase Path           |
+| --- | ------------------------------ | ----------------------------------------------------------- | ----------------------- |
+| 1   | **Medical Membership Program** | Individuals, families needing structured medical membership | Direct digital purchase |
+| 2   | **Expatriate Healthcare**      | Expats, long-term international travelers                   | Direct digital purchase |
+| 3   | **Health Compass**             | Complex needs, HR/corporate, broker-assisted                | Quote request flow      |
 
 ---
 
@@ -40,10 +32,10 @@ All three products are **external third-party platforms**. Ernest Maude does not
 
 ## 4. Core User Scenarios
 
-1. **Guided First-Timer** — Completes questionnaire → receives personalised recommendation → clicks through to the correct external platform with confidence
-2. **Direct Browse User** — Scans product cards → selects known product → clicks through in minimal steps
-3. **Research & Comparison User** — Explores and compares all options on-page before deciding which external platform to visit
-4. **Assisted Support User** — Needs clarification mid-journey → uses hover tooltips without leaving the page → or escalates to WhatsApp
+1. **Guided First-Timer** — Completes questionnaire → receives personalised recommendation → purchases or requests quote
+2. **Direct Purchase User** — Selects a known product → completes purchase with minimal steps
+3. **Research & Comparison User** — Explores and compares all options before deciding
+4. **Assisted Support User** — Needs clarification → uses tooltips or WhatsApp escalation
 
 ---
 
@@ -52,9 +44,13 @@ All three products are **external third-party platforms**. Ernest Maude does not
 ```
 src/
 ├── app/
-│   ├── page.tsx                    # Landing / entry point — journey selector + product cards
-│   ├── compare/page.tsx            # Side-by-side comparison interface
-│   └── recommend/page.tsx          # Guided recommendation flow
+│   ├── page.tsx                    # Landing / entry point
+│   ├── compare/page.tsx            # Comparison interface
+│   ├── recommend/page.tsx          # Guided recommendation flow
+│   └── products/
+│       ├── medical-membership/page.tsx
+│       ├── expatriate-healthcare/page.tsx
+│       └── health-compass/page.tsx
 ├── components/
 │   ├── layout/
 │   │   ├── Header.tsx
@@ -63,7 +59,7 @@ src/
 │   ├── home/
 │   │   ├── HeroSection.tsx
 │   │   ├── JourneySelector.tsx     # "Find my plan" vs "Browse all"
-│   │   └── ProductCards.tsx        # All 3 products with handoff CTAs
+│   │   └── ProductCards.tsx
 │   ├── recommendation/
 │   │   ├── QuestionnaireFlow.tsx        # Multi-step wizard container & loop logic
 │   │   ├── StepExpatriate.tsx           # "Are you an expatriate?"
@@ -75,25 +71,25 @@ src/
 │   │   ├── StepGroupMembership.tsx      # "Are you familiar with group memberships?"
 │   │   ├── StepTrustStructure.tsx       # "Do you understand a group membership is held under a Trust?"
 │   │   ├── StepFMU.tsx                  # "Do you require Full Medical Underwriting?"
-│   │   └── RecommendationResult.tsx     # Recommended product + rationale + handoff CTA
+│   │   └── RecommendationResult.tsx
 │   ├── comparison/
 │   │   ├── ComparisonTable.tsx
 │   │   ├── ComparisonToggle.tsx    # Summary vs detailed view
 │   │   └── FeatureRow.tsx
 │   ├── products/
-│   │   ├── ProductCard.tsx         # Individual product card with benefits summary
+│   │   ├── ProductDetail.tsx
 │   │   ├── BenefitsList.tsx
 │   │   ├── EligibilityBadge.tsx
-│   │   └── HandoffCTA.tsx          # Single external link CTA per product — NOT a purchase form
+│   │   └── PurchaseCTA.tsx
 │   ├── shared/
-│   │   ├── InfoTooltip.tsx         # ⭐ Hover-activated (i) tooltip — core UX component
-│   │   ├── WhatsAppButton.tsx      # Persistent floating button, bottom-right
+│   │   ├── Tooltip.tsx             # Hover-based terminology tooltips
+│   │   ├── WhatsAppButton.tsx
 │   │   ├── StepIndicator.tsx
-│   │   └── InsuranceTerm.tsx       # Inline glossary — hover to reveal definition
+│   │   └── InsuranceTerm.tsx      # Inline glossary component
 │   └── ui/                         # shadcn/ui components (pre-configured)
 ├── lib/
-│   ├── recommendation-engine.ts    # Rules-based routing logic
-│   ├── products.ts                 # Product data, external URLs, and configs
+│   ├── recommendation-engine.ts    # Rules-based matching logic
+│   ├── products.ts                 # Product data and configs
 │   └── utils.ts
 ├── hooks/
 │   ├── useQuestionnaire.ts         # Wizard state management
@@ -109,33 +105,25 @@ src/
 
 ### 6.1 Dual User Journeys
 
-> **Core UX Principle — No Unnecessary Click-Aways**
-> The visitor must never need to leave the page to understand something. All clarification, terminology explanations, and educational context must be delivered via **hover-activated `(i)` tooltips** inline. Clicking away for an explanation causes loss of attention and breaks the journey. This is a hard UX constraint, not a preference.
-
 #### A — Direct Selection Path
 
-- Display all three IPMI products as scannable cards on the landing page
+- Display all three IPMI solutions as scannable product cards on landing
 - Each card: summary, eligibility indicators, key benefits, ideal user badge
-- All terminology that may be unfamiliar must have an inline `(i)` tooltip — no external links for definitions
-- Side-by-side comparison accessible in one click, entirely on-page
-- A single **handoff CTA** per product — one deliberate click to the external platform
-- CTA remains visible throughout; no more than two clicks from landing to handoff
+- Side-by-side comparison accessible in one click
+- CTA visible at all times; minimal steps to purchase/quote
 
 #### B — Guided Recommendation Flow
 
 - Decision-tree questionnaire driven by the logic defined in **Section 6.2** below
 - Progress indicator showing current step and total
 - Smart transitions between steps (no page reloads)
-- Plain-English questions — avoid insurance jargon; where jargon is unavoidable, wrap in an `(i)` tooltip
+- Plain-English questions — avoid insurance jargon in questions
 - Loop handling: user is re-asked awareness questions until they confirm understanding before advancing
-- Final screen: recommended product + plain-English rationale + single handoff CTA to external platform
-- Alternative options shown below the primary recommendation for self-directed users
+- Final screen: recommended plan + rationale + alternatives
 
 ### 6.2 Recommendation Engine (`lib/recommendation-engine.ts`)
 
-The engine implements the following decision tree exactly. Each node is a yes/no question; outcomes are one of four **external handoff destinations**: **Medical Membership Program**, **Expatriate Healthcare**, **Health Compass**, or **Standard Contract**.
-
-> **Important:** "Full comparisons with AI Assistant" in the tree refers to routing the visitor to the **Health Compass external platform** (`api.health-compass.com/ernestmaude`), which has its own built-in AI comparison engine. This is not a feature we build — it is a handoff destination.
+The engine implements the following decision tree exactly. Each node is a yes/no question; outcomes are one of four destinations: **Medical Membership Program**, **Expatriate Healthcare**, **Health Compass**, or **Standard Contract**.
 
 #### Decision Tree
 
@@ -286,20 +274,14 @@ type Recommendation = {
 - Highlight recommended plan based on questionnaire (if available in state)
 - "Choose this plan" CTA per column
 
-### 6.4 Handoff & Support
+### 6.4 Conversion & Support
 
-All conversion actions are **external handoffs** — we link out, we do not build purchase or quote flows.
-
-| Action                        | Products      | Implementation                                                                                     |
-| ----------------------------- | ------------- | -------------------------------------------------------------------------------------------------- |
-| Direct purchase handoff       | Options 1 & 2 | Single CTA button → opens external platform URL                                                    |
-| AI comparison + quote handoff | Option 3      | Single CTA button → opens `api.health-compass.com/ernestmaude`                                     |
-| WhatsApp support              | All           | Persistent floating button — primary human escalation channel                                      |
-| Escalation path               | All           | "Speak to an advisor" CTA surfaced when user reaches Standard Contract outcome or shows hesitation |
-
-**CTA behaviour (pending client confirmation):** External links currently open in a new tab (`target="_blank"`). Confirm with client whether full-page navigation is preferred for Options 1 and 2.
-
-> **Option 3 — known friction:** The Health Compass flow ultimately requires a wet-ink application and a formal quotation followed by an intense follow-up period. Set visitor expectations clearly on the recommendation result screen before handoff — e.g. _"This option includes a personalised quote process. Ernest Maude will follow up directly."_
+| Integration      | Products      | Implementation                                               |
+| ---------------- | ------------- | ------------------------------------------------------------ |
+| Direct purchase  | Options 1 & 2 | Internal purchase flow / redirect to provider                |
+| Quote request    | Option 3      | Multi-field quote form with email confirmation               |
+| WhatsApp support | All           | Floating WhatsApp button (persistent, bottom-right)          |
+| Escalation path  | All           | "Speak to an advisor" CTA when user shows hesitation signals |
 
 WhatsApp number: configure via `NEXT_PUBLIC_WHATSAPP_NUMBER` env variable.
 
@@ -312,24 +294,6 @@ WhatsApp number: configure via `NEXT_PUBLIC_WHATSAPP_NUMBER` env variable.
 - **Tone:** Premium, trustworthy, refined — high-end healthtech/fintech aesthetic
 - **Not:** Generic insurance blue, stock photography heavy, cluttered forms
 - **Reference feeling:** Clean like Stripe, warm like Calm, authoritative like BUPA digital
-
-### 7.2 Hover Tooltip — Core UX Pattern (`InfoTooltip.tsx`)
-
-The `(i)` hover tooltip is the **most important UI pattern in this application**. It is the mechanism that replaces all click-away explanations. Every instance of insurance jargon, product terminology, or concept that a first-time visitor may not understand must be wrapped in this component.
-
-**Behaviour:**
-
-- Triggered on mouse hover (desktop) and tap (mobile)
-- Appears above the trigger element with a 4px offset
-- Fades in over 150ms — no delay
-- Dismisses on mouse-out or tap-outside
-- Never requires a click to open; never navigates away from the page
-- Content: 1–3 sentences maximum — quick clarification only, not a full article
-  **Accessibility:**
-- `role="tooltip"` on the popover element
-- `aria-describedby` linking trigger to tooltip
-- Keyboard accessible: tooltip appears on focus, dismisses on blur
-  **Do not** use modal dialogs, accordions, or external links as substitutes for this pattern.
 
 ### 7.2 Component Conventions (shadcn/ui)
 
@@ -435,16 +399,15 @@ NEXT_PUBLIC_EM_INTERNATIONAL_URL= # Ernest Maude International URL
 
 Instrument key events for GTM/GA4:
 
-| Event                            | Trigger                                                               |
-| -------------------------------- | --------------------------------------------------------------------- |
-| `ipmi_journey_started`           | User clicks "Find my plan"                                            |
-| `ipmi_step_completed`            | Each questionnaire step completed                                     |
-| `ipmi_recommendation_viewed`     | Recommendation result screen shown                                    |
-| `ipmi_comparison_opened`         | Comparison table viewed                                               |
-| `ipmi_tooltip_opened`            | Any `(i)` tooltip activated                                           |
-| `ipmi_handoff_clicked`           | Any external platform CTA clicked — include `product_id` as parameter |
-| `ipmi_whatsapp_opened`           | WhatsApp button clicked                                               |
-| `ipmi_standard_contract_reached` | User routed to Standard Contract outcome                              |
+| Event                        | Trigger                     |
+| ---------------------------- | --------------------------- |
+| `ipmi_journey_started`       | User clicks "Find my plan"  |
+| `ipmi_step_completed`        | Each questionnaire step     |
+| `ipmi_recommendation_viewed` | Recommendation result shown |
+| `ipmi_comparison_opened`     | Comparison table viewed     |
+| `ipmi_cta_clicked`           | Any purchase/quote CTA      |
+| `ipmi_whatsapp_opened`       | WhatsApp button clicked     |
+| `ipmi_quote_submitted`       | Quote form submitted        |
 
 ---
 
@@ -453,52 +416,50 @@ Instrument key events for GTM/GA4:
 ### Phase 1 — Foundation
 
 - [ ] Project setup, routing, layout shell (Header, Footer)
-- [ ] Product data layer (`lib/products.ts`) with external URLs
+- [ ] Product data layer (`lib/products.ts`)
 - [ ] Landing page with journey selector and product cards
-- [ ] `InfoTooltip.tsx` component — implement and test hover behaviour before any other UI
+- [ ] Design tokens and typography applied
 
 ### Phase 2 — Guided Flow
 
-- [ ] Questionnaire wizard (all decision tree steps)
+- [ ] Questionnaire wizard (all 6 steps)
 - [ ] Progress indicator component
 - [ ] Recommendation engine (`lib/recommendation-engine.ts`)
-- [ ] Recommendation result screen with handoff CTA
-- [ ] Standard Contract outcome screen with WhatsApp escalation
+- [ ] Recommendation result screen
 
-### Phase 3 — Comparison
+### Phase 3 — Comparison & Products
 
-- [ ] Side-by-side comparison table with summary/detailed toggle
-- [ ] Recommended plan highlighting (if arriving from questionnaire)
-- [ ] `HandoffCTA.tsx` per product column
+- [ ] Product detail pages (all 3)
+- [ ] Comparison table with toggle
+- [ ] Side-by-side highlighting
 
-### Phase 4 — Handoff & Support
+### Phase 4 — Conversion
 
-- [ ] External URL wiring for all three products
-- [ ] WhatsApp floating button integration
-- [ ] Option 3 pre-handoff expectation screen (explaining the analogue quote process)
-- [ ] Escalation path for Standard Contract outcome
+- [ ] Direct purchase flow (Options 1 & 2)
+- [ ] Quote request form (Option 3)
+- [ ] WhatsApp integration
+- [ ] Escalation / advisor paths
 
 ### Phase 5 — Polish & QA
 
 - [ ] Accessibility audit and fixes
 - [ ] Mobile responsiveness review
-- [ ] Analytics instrumentation (all events in Section 13)
+- [ ] Analytics instrumentation
 - [ ] Performance optimisation (Core Web Vitals)
 - [ ] Cross-browser testing
-- [ ] Confirm CTA link behaviour (new tab vs full navigation) with client
+
+---
 
 ## 15. Key Constraints & Decisions
 
-- **This platform is a routing layer, not a purchase platform** — do not build internal purchase flows, quote forms, or AI tools; those exist on the external platforms
-- **All three products are external** — `externalUrl` in `lib/products.ts` is the source of truth for handoff destinations
-- **No unnecessary click-aways** — every explanation must be delivered via hover `(i)` tooltip on the current page; never link to external definitions or open modals for clarification
-- **One deliberate handoff click** — the visitor should reach the external platform in no more than two clicks from the landing page
 - **No external state library** for MVP — React Context is sufficient
 - **shadcn/ui is pre-configured** — do not reinstall or modify the base config
-- **Recommendation engine is rules-based** — the AI in Option 3 is the Health Compass platform's feature, not ours to build
+- **Recommendation engine is rules-based** — no ML/AI for MVP; architecture must support future AI layer
 - **Both Ernest Maude sites share this codebase** — use environment variables to customise branding per site, not separate codebases
 - **WhatsApp is the primary human escalation channel** — no live chat widget for MVP
-- **CTA link behaviour (new tab vs navigation) is pending client confirmation** — use `target="_blank"` as default until confirmed
+- **Quote form for Health Compass only** — Options 1 and 2 are direct-purchase
+
+---
 
 ## 16. Definition of Done
 
@@ -510,14 +471,3 @@ A feature is complete when:
 4. Analytics event fires correctly on the relevant trigger
 5. Matches design direction: premium, trustworthy, conversion-focused
 6. Component is documented with a JSDoc comment describing its props and purpose
-7. No click-away explanations exist — all clarifications delivered via `InfoTooltip.tsx`
-
----
-
-## 17. Open Questions (Pending Client Confirmation)
-
-| #   | Question                                                                              | Impact                                 |
-| --- | ------------------------------------------------------------------------------------- | -------------------------------------- |
-| 1   | Should external platform links open in a **new tab** or **replace the current page**? | `HandoffCTA.tsx` `target` attribute    |
-| 2   | What are the exact external URLs for Options 1 and 2?                                 | `lib/products.ts` `externalUrl` values |
-| 3   | Should the Standard Contract outcome show a specific message or redirect?             | `RecommendationResult.tsx` edge case   |

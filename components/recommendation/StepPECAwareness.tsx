@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { YesNoStep } from "./YesNoStep"
+import { InfoTooltip } from "@/components/shared/InfoTooltip"
 import { Button } from "@/components/ui/button"
 
 interface StepPECAwarenessProps {
@@ -38,8 +39,19 @@ export function StepPECAwareness({
 
   return (
     <YesNoStep
-      question="Are you aware that pre-existing medical conditions are most often excluded from IPMI policies?"
-      subtext="A pre-existing condition is any illness, injury or medical condition you have been diagnosed with or received treatment for before your policy starts."
+      question={
+        <span>
+          Are you aware that{" "}
+          <span className="inline-flex items-baseline gap-1">
+            <InfoTooltip
+              triggerText="pre-existing medical conditions "
+              content="A pre-existing condition is any illness, injury, or medical condition you have been diagnosed with, received treatment for, or shown symptoms of before your policy start date. Most IPMI plans exclude these by default."
+            />
+          </span>{" "}
+          are most often excluded from IPMI policies?
+        </span>
+      }
+      subtext="This is an important aspect of IPMI that all applicants must understand before proceeding."
       onYes={onYes}
       onNo={handleNo}
       onBack={onBack}

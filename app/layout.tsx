@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { TooltipProvider } from "@/components/ui/tooltip"
 import { cn } from "@/lib/utils"
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" })
@@ -44,7 +45,9 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

@@ -1,3 +1,4 @@
+import { InfoTooltip } from "@/components/shared/InfoTooltip"
 import { YesNoStep } from "./YesNoStep"
 
 interface StepTrustStructureProps {
@@ -17,8 +18,19 @@ export function StepTrustStructure({
 }: StepTrustStructureProps) {
   return (
     <YesNoStep
-      question="Do you understand that a group membership plan is held under a Trust structure?"
-      subtext="A Trust-based plan means your membership is administered by a trustee body rather than a traditional insurer. Benefits and terms are governed by the Trust deed."
+      question={
+        <span>
+          Do you understand that a group membership plan is held under a{" "}
+          <span className="inline-flex items-baseline gap-1">
+            <InfoTooltip
+              triggerText="Trust structure "
+              content="A Trust-based plan is administered by an independent trustee body rather than a traditional insurance company. Benefits and terms are governed by the Trust deed. This structure can offer more flexibility, but it differs from a standard regulated insurer arrangement."
+            />
+          </span>
+          ?
+        </span>
+      }
+      subtext="If you prefer a plan underwritten by a traditional regulated insurer, we have a suitable alternative."
       onYes={onYes}
       onNo={onNo}
       onBack={onBack}

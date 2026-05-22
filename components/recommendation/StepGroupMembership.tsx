@@ -1,3 +1,4 @@
+import { InfoTooltip } from "@/components/shared/InfoTooltip"
 import { YesNoStep } from "./YesNoStep"
 
 interface StepGroupMembershipProps {
@@ -17,8 +18,19 @@ export function StepGroupMembership({
 }: StepGroupMembershipProps) {
   return (
     <YesNoStep
-      question="Are you familiar with group membership schemes — for example, how employer health schemes work?"
-      subtext="Group memberships pool members together under a single policy structure, similar to how workplace health benefits are organised."
+      question={
+        <span>
+          Are you familiar with{" "}
+          <span className="inline-flex items-baseline gap-1">
+            <InfoTooltip
+              triggerText="group membership schemes "
+              content="A group membership scheme pools multiple members under a single policy structure — similar to how workplace health benefits work. Members benefit from group purchasing power, which can reduce premiums compared to individual policies."
+            />
+          </span>
+          ?
+        </span>
+      }
+      subtext="For example, employer health schemes or association-based cover. Familiarity with this structure helps us direct you to the right plan."
       onYes={onYes}
       onNo={onNo}
       onBack={onBack}

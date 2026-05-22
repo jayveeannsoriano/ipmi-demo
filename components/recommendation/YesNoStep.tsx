@@ -1,8 +1,13 @@
+import * as React from "react"
 import { Button } from "@/components/ui/button"
 
 interface YesNoStepProps {
-  /** The plain-English question to display */
-  question: string
+  /**
+   * The plain-English question to display.
+   * Accepts ReactNode so individual step components can embed inline
+   * InfoTooltip elements next to jargon terms without extra wrapper divs.
+   */
+  question: React.ReactNode
   /** Optional supporting context shown below the question */
   subtext?: string
   /** Optional additional content (e.g. educational interstitial for PEC loop) */

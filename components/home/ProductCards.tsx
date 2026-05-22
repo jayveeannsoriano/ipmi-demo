@@ -2,12 +2,34 @@ import Link from "next/link"
 import { ArrowRight, CheckIcon } from "lucide-react"
 import { PRODUCTS } from "@/lib/products"
 import { PRODUCT_COLORS } from "@/lib/product-colors"
+import { InfoTooltip } from "@/components/shared/InfoTooltip"
 import { Check } from "@phosphor-icons/react"
+import { HandoffCTA } from "../products/HandoffCTA"
 
 const PRICE_TIER_LABEL: Record<string, string> = {
   economy: "Economy",
   mid: "Mid-range",
   premium: "Premium",
+}
+
+const PRICE_TIER_TOOLTIP: Record<string, string> = {
+  economy:
+    "Entry-level cover focusing on essential inpatient care at a lower price point.",
+  mid: "Balanced cover including inpatient care and key outpatient benefits. Suited to most individual and family needs.",
+  premium:
+    "Comprehensive cover with the broadest benefits, highest limits, and optional enhancements such as dental and maternity.",
+}
+
+const HANDOFF_TYPE_LABEL: Record<string, string> = {
+  "direct-purchase": "Direct purchase",
+  "ai-comparison-quote": "Expert quote",
+}
+
+const HANDOFF_TYPE_TOOLTIP: Record<string, string> = {
+  "direct-purchase":
+    "You can purchase this plan instantly online, 24/7 — no broker or adviser call required. Fixed pricing means no waiting for a personalised quote.",
+  "ai-comparison-quote":
+    "This plan uses an AI-assisted comparison to find the best fit for your profile, followed by a formal quote. An Ernest Maude adviser will follow up directly.",
 }
 
 /**
@@ -54,8 +76,12 @@ export function ProductCards() {
                     ) : (
                       <span />
                     )}
-                    <span className="ml-auto text-xs text-muted-foreground">
+                    <span className="ml-auto inline-flex items-center gap-1 text-xs text-muted-foreground">
                       {PRICE_TIER_LABEL[product.priceTier]}
+                      <InfoTooltip
+                        size="sm"
+                        content={PRICE_TIER_TOOLTIP[product.priceTier]}
+                      />
                     </span>
                   </div>
                   <h3
@@ -110,22 +136,20 @@ export function ProductCards() {
 
                 {/* Footer */}
                 <div className="flex items-center justify-between gap-3 border-t border-border px-6 py-4">
-                  <Link
-                    href={product.ctaUrl}
-                    className={[
-                      "inline-flex items-center gap-1.5 rounded-md px-4 py-2 text-sm font-medium text-white transition-colors",
-                      colors.ctaBg,
-                    ].join(" ")}
-                  >
-                    {product.ctaLabel}
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                  <Link
-                    href="/compare"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    Compare
-                  </Link>
+                  <HandoffCTA
+                    label={product.ctaLabel}
+                    href={product.externalUrl}
+                    className={colors.ctaBg}
+                  />
+                  <div className="flex items-center gap-3">
+                    <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                      {HANDOFF_TYPE_LABEL[product.handoffType]}
+                      <InfoTooltip
+                        size="sm"
+                        content={HANDOFF_TYPE_TOOLTIP[product.handoffType]}
+                      />
+                    </span>
+                  </div>
                 </div>
               </div>
             )

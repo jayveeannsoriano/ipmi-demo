@@ -1,3 +1,4 @@
+import { InfoTooltip } from "@/components/shared/InfoTooltip"
 import { YesNoStep } from "./YesNoStep"
 
 interface StepExpatriateProps {
@@ -12,8 +13,19 @@ interface StepExpatriateProps {
 export function StepExpatriate({ onYes, onNo }: StepExpatriateProps) {
   return (
     <YesNoStep
-      question="Are you an expatriate?"
-      subtext="An expatriate is someone who lives or works outside their home country, either temporarily or permanently."
+      question={
+        <span>
+          Are you an{" "}
+          <span className="inline-flex items-baseline gap-1">
+            <InfoTooltip
+              triggerText="expatriate"
+              content="An expatriate is someone who lives or works outside their home country — either on a fixed-term assignment or permanently. IPMI is designed specifically for this situation."
+            />
+          </span>
+          ?
+        </span>
+      }
+      subtext="If you are based in your home country, IPMI may not be the right product for you — we can point you in the right direction."
       onYes={onYes}
       onNo={onNo}
       yesLabel="Yes, I live or work abroad"

@@ -29,15 +29,10 @@ export function JourneySelector() {
                 </p>
               </div>
               <div className="flex flex-wrap gap-3">
-                <Button asChild size="lg" className="rounded-md px-6">
+                <Button asChild size="lg" className="px-6">
                   <Link href="/recommend">Get My Recommendation</Link>
                 </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="rounded-md px-6"
-                >
+                <Button asChild variant="outline" size="lg" className="px-6">
                   <Link href="/compare">Browse All Plans</Link>
                 </Button>
               </div>

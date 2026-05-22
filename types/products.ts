@@ -35,9 +35,27 @@ export type Product = {
   idealFor: string[]
   keyBenefits: Benefit[]
   features: FeatureMatrix
-  purchasePath: "direct" | "quote"
+  /** How the visitor is handed off — all products route to external platforms */
+  handoffType: "direct-purchase" | "ai-comparison-quote"
+  /** External platform URL — the single handoff destination for this product */
+  externalUrl: string
   ctaLabel: string
-  ctaUrl: string
   priceTier: PriceTier
   badge?: string
+  /**
+   * True for Medical Membership Program — price is fixed regardless of age or
+   * gender, so no quotation step is needed before handoff.
+   */
+  fixedPrice?: boolean
+  /**
+   * True for Options 1 & 2 — preferred conversion targets due to 24/7
+   * straight-through digital purchase. Influences visual priority in the UI.
+   */
+  preferredOption?: boolean
+  /**
+   * Pre-handoff expectation copy shown on the recommendation result screen
+   * before the user clicks through. Required for Health Compass (Option 3)
+   * which involves a wet-ink application and analogue follow-up.
+   */
+  handoffWarning?: string
 }

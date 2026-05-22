@@ -1,3 +1,4 @@
+import { InfoTooltip } from "@/components/shared/InfoTooltip"
 import { YesNoStep } from "./YesNoStep"
 
 interface StepPreSelectedOptionsProps {
@@ -18,8 +19,19 @@ export function StepPreSelectedOptions({
 }: StepPreSelectedOptionsProps) {
   return (
     <YesNoStep
-      question="Would you consider two pre-selected best-of-breed IPMI options with online purchase?"
-      subtext="Our advisors have identified two top-rated plans that suit most expatriate profiles. Choosing this option connects you with Health Compass for expert-guided selection."
+      question={
+        <span>
+          Would you consider two{" "}
+          <span className="inline-flex items-baseline gap-1">
+            <InfoTooltip
+              triggerText="pre-selected best-of-breed"
+              content="Our advisors have reviewed all available IPMI plans and identified the two that offer the strongest combination of cover, price, and digital purchase experience for most expatriate profiles."
+            />
+          </span>{" "}
+          IPMI options with online purchase?
+        </span>
+      }
+      subtext="Choosing this option connects you with Health Compass for expert-guided plan selection and an instant online quote."
       onYes={onYes}
       onNo={onNo}
       onBack={onBack}

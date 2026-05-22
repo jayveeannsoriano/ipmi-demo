@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { BenefitsList } from "./BenefitsList"
 import { EligibilityBadge } from "./EligibilityBadge"
-import { PurchaseCTA } from "./PurchaseCTA"
+import { HandoffCTA } from "./HandoffCTA"
 import { PRODUCT_COLORS } from "@/lib/product-colors"
 import type { Product } from "@/types/products"
 
@@ -54,10 +54,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
         <p className="max-w-2xl text-base leading-relaxed text-muted-foreground">
           {product.description}
         </p>
-        <PurchaseCTA
+        <HandoffCTA
           label={product.ctaLabel}
-          href={product.purchasePath === "quote" ? `#quote-form` : "#purchase"}
-          purchasePath={product.purchasePath}
+          href={product.externalUrl}
+          handoffType={product.handoffType}
+          className={colors.ctaBg}
         />
       </div>
 

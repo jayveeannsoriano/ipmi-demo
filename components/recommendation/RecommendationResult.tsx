@@ -162,7 +162,13 @@ export function RecommendationResult({
 
             <div className="flex flex-wrap gap-3">
               <Button asChild className="flex-1 sm:flex-none">
-                <Link href={primary.ctaUrl}>{primary.ctaLabel}</Link>
+                <Link
+                  href={primary.externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {primary.ctaLabel}
+                </Link>
               </Button>
               <Button variant="outline" asChild>
                 <Link href="/compare">Compare all plans</Link>
@@ -197,7 +203,13 @@ export function RecommendationResult({
                       asChild
                       className="mt-2 h-auto p-0 text-xs"
                     >
-                      <Link href={alt.ctaUrl}>Learn more →</Link>
+                      <Link
+                        href={alt.externalUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Learn more →
+                      </Link>
                     </Button>
                   </CardContent>
                 </Card>

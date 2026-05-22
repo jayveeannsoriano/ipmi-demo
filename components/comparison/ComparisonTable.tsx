@@ -112,7 +112,13 @@ export function ComparisonTable({ highlightId }: ComparisonTableProps) {
                     asChild
                     className="w-full"
                   >
-                    <Link href={p.ctaUrl}>{p.ctaLabel}</Link>
+                    <Link
+                      href={p.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {p.ctaLabel}
+                    </Link>
                   </Button>
                 </td>
               ))}

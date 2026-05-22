@@ -1,9 +1,9 @@
-import { InsuranceTerm } from "@/components/shared/InsuranceTerm"
+import { InfoTooltip } from "@/components/shared/InfoTooltip"
 
 /**
  * AboutIPMI — editorial explainer section on the landing page.
  * Covers what IPMI is, pre-existing condition exclusions, and FMU.
- * Uses InsuranceTerm for inline glossary callouts on key jargon.
+ * Uses InfoTooltip (term mode) for inline glossary callouts on key jargon.
  */
 export function AboutIPMI() {
   return (
@@ -31,16 +31,16 @@ export function AboutIPMI() {
               Global coverage
             </p>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              <InsuranceTerm
-                term="IPMI"
-                definition="International Private Medical Insurance — health cover designed specifically for people living outside their home country."
+              <InfoTooltip
+                triggerText="IPMI"
+                content="International Private Medical Insurance — health cover designed specifically for people living outside their home country."
               />{" "}
               provides worldwide coverage — often excluding the USA — for
               medical expenses incurred outside your home country, making it the
               standard choice for{" "}
-              <InsuranceTerm
-                term="expatriates"
-                definition="People who live and work outside their country of origin, either temporarily or permanently."
+              <InfoTooltip
+                triggerText="expatriates"
+                content="People who live and work outside their country of origin, either temporarily or permanently."
               />
               . USA coverage can usually be added, though this typically carries
               a significant additional premium. Benefits typically include
@@ -56,9 +56,9 @@ export function AboutIPMI() {
             </p>
             <p className="text-sm leading-relaxed text-muted-foreground">
               Most policies, plans, and schemes exclude{" "}
-              <InsuranceTerm
-                term="pre-existing conditions"
-                definition="Any medical condition that was diagnosed, treated, or in some cases even present (whether diagnosed or not) before the policy start date. These are typically not covered as standard."
+              <InfoTooltip
+                triggerText="pre-existing conditions"
+                content="Any medical condition that was diagnosed, treated, or in some cases even present (whether diagnosed or not) before the policy start date. These are typically not covered as standard."
               />{" "}
               — any health issue diagnosed or treated before the policy start
               date. In some cases this extends to conditions that existed but
@@ -74,9 +74,9 @@ export function AboutIPMI() {
               Full Medical Underwriting
             </p>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              <InsuranceTerm
-                term="Full Medical Underwriting (FMU)"
-                definition="A thorough review of an applicant's complete medical history by the insurer or scheme administrator, used to determine what will and will not be covered and to set an appropriate premium."
+              <InfoTooltip
+                triggerText="Full Medical Underwriting (FMU)"
+                content="A thorough review of an applicant's complete medical history by the insurer or scheme administrator, used to determine what will and will not be covered and to set an appropriate premium."
               />{" "}
               is a process in which the insurer or scheme administrator reviews
               your complete health history before issuing cover. This results in
